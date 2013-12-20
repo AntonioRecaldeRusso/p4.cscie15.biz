@@ -39,11 +39,8 @@
 		
 		public function p_tree()
 		{
-			$index = print_r($_POST['index'], true);
 			
-			
-			
-			echo print_r($_POST['']);
+			echo print_r($_POST);
 			
 		//	echo json_encode($data);
 		}

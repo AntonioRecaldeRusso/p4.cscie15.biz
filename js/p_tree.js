@@ -1,23 +1,21 @@
-$('#refresh-button').click(function() {
+	counter = 0;
+	index = '';
+	path = '';
+	var options = {
+			type: "POST",
+			url: "/decision/p_tree",
+			beforeSend: function() {
+				path = $('input[name="path"]:checked').val();
+				index = index.concat(path);
+			},	
+			data: {
+				index: index
+			},
+			success: function(response) {
+				console.log('response: ' + response);
+				console.log('index value: ' + index);
+			}
+			
+	};
 
-    $.ajax({
-        type: 'POST',
-        url: '/decision/p_tree',
-        success: function(response) { 
-
-            // For debugging purposes
-            // console.log(response);
-
-            // Example response: {"post_count":"9","user_count":"13","most_recent_post":"May 23, 2012 1:14am"}
-
-            // Parse the JSON results into an array
-            var data = $.parseJSON(response);
-
-            // Inject the data into the page
-            $('#post_count').html(data['post_count']);
-            $('#user_count').html(data['user_count']);
-            $('#most_recent_post').html(data['most_recent_post']);
-
-        },
-    });
-});
+	$("form").ajaxForm(options);
