@@ -39,20 +39,14 @@
 		
 		public function p_tree()
 		{
-			if ($_POST['index'] == "start")
-				$_POST['index'] = "";
+			$index = print_r($_POST['index'], true);
 			
-			$index = $data['index'] = $_POST['index'].$_POST['path'];
-			$bin_arr = array(
-					'1'  => 'string1',
-					'10' => 'string2',
-					'11' => 'string3'
-			);
-			$data['string'] = $bin_arr[$index];
 			
-		//	echo json_encode($temp);
-			echo $_POST['path'];
 			
+			echo print_r($_POST['']);
+			
+		//	echo json_encode($data);
 		}
-	}
+}
 ?>
+	

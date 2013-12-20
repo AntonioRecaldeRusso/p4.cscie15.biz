@@ -1,30 +1,23 @@
-	var counter = 0;
-	var path;
-	var last_index = "start"; console.log('here ' + last_index);
-	var options = {
-			
-			type: "POST",
-			url: "/decision/p_tree",
-			beforeSubmit: function() {
-				path = $("input[type='radio'][name='path']:checked").val();
-			},
-			data: {
-				index: last_index,
-				path: path
-			},
-			success: function(response) {
-			//	var data = $.parseJSON(response);
-			//	$("#response" + counter++).html(data['string']);
-			//	console.log("index is " + last_index);
-				
-			//	if (last_index == "start")
-			//		last_index = ""
-						
-			//	last_index = last_index + data['index'];
-			//	console.log("after concat " + last_index);
-			//	console.log("data index " + data['index']);
-				console.log(response);	
-			}
-	};
+$('#refresh-button').click(function() {
 
-	$("form").ajaxForm(options);
+    $.ajax({
+        type: 'POST',
+        url: '/decision/p_tree',
+        success: function(response) { 
+
+            // For debugging purposes
+            // console.log(response);
+
+            // Example response: {"post_count":"9","user_count":"13","most_recent_post":"May 23, 2012 1:14am"}
+
+            // Parse the JSON results into an array
+            var data = $.parseJSON(response);
+
+            // Inject the data into the page
+            $('#post_count').html(data['post_count']);
+            $('#user_count').html(data['user_count']);
+            $('#most_recent_post').html(data['most_recent_post']);
+
+        },
+    });
+});
