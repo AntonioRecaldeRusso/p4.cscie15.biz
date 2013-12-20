@@ -37,10 +37,10 @@
 			echo $this->template;
 		}
 		
-		public function p_tree()
+		public function p_tree($index = NULL)
 		{
 			
-			echo print_r($_POST);
+			echo $index;
 			
 		//	echo json_encode($data);
 		}
