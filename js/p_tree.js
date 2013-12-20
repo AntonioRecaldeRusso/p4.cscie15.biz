@@ -4,15 +4,22 @@
 	var options = {
 			type: "POST",
 			beforeSend: function() {
-				path = $('input[name="path"]:checked').val();
-				index = index.concat(path);
+				id = $('input[name="path"]:checked').attr('id');
+				if (id == 'yes')
+					index = index.concat('1');
+				else
+					index = index.concat('0');
 			},	
-			url: "/decision/p_tree/1",
-			data: {
-				index: index,
-			},
+			url: "/decision/p_tree/",
+	//		data: {
+	//			index: index 
+	//		},
 			success: function(response) {
-				console.log('response: ' + response);
+				console.log("path response: " + response);
+				$("#yes").val('' + index + '1');
+				$('#no').val('' + index + '0');
+				$('#response' + counter++).html(response);
+				
 			}
 			
 	};

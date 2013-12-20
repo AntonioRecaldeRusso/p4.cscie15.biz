@@ -37,12 +37,26 @@
 			echo $this->template;
 		}
 		
-		public function p_tree($index = NULL)
+		public function p_tree()
 		{
+			$index = $_POST['path'];
 			
-			echo $index;
+			$bin_arr = array(
+					'1'  			=> 'Did anyone see you',
+					'10' 			=> 'Was it sticky?',
+					'11' 			=> 'Was it a boss/lover/parent?',
+					'100'			=> 'Is it an Emausaurus?',
+					'101'			=> 'Is is a raw steak?',
+					'110'			=> 'EAT IT',
+					'111'			=> 'Was it expensive',
+					'1000'			=> 'Did the cat lick it',
+					'1001'			=> 'Are you a Megalosaurus',
+					'1010'			=> 'Did the cat lick it',
+					'1011'			=> 'Are you a Puma?'
+			);
 			
-		//	echo json_encode($data);
+			echo $bin_arr[$index];
+		
 		}
 }
 ?>
