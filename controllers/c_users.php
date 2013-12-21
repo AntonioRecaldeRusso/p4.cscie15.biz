@@ -68,14 +68,7 @@ class users_controller extends base_controller
 			if (ltrim($value, ' ') === '')
 				$empty_field = true;
 		}
-		
-		# Check if string consists of only spaces
-		
-		
-		
-		
-		// still need to check for field with spaces but not characters. check set of characters maybe.
-		
+
 		#Update the post data in order to inject into database
 		$_POST['password']  = sha1(PASSWORD_SALT.$_POST['password']);
 		$_POST['token']     = sha1(TOKEN_SALT.$_POST['username'].Utils::generate_random_string());
@@ -91,7 +84,7 @@ class users_controller extends base_controller
 			Router::redirect('/users/index');
 		}
 		
-		#There are errors, display the signup page again, returning to the user the causes
+		#There are errors, display the signup page again, returning the cause
 		else
 			$this->signup($username_exists, $password_error, $empty_field);
 	}
