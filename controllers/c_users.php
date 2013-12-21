@@ -60,8 +60,20 @@ class users_controller extends base_controller
 		#check for empty fields
 		$empty_field = false;
 		foreach ($_POST as $key => $value)
+		{
 			if ( strlen($value) < 1 )
-			$empty_field = true;
+				$empty_field = true;
+			
+		#check for fields with only the blank character
+			if (ltrim($value, ' ') === '')
+				$empty_field = true;
+		}
+		
+		# Check if string consists of only spaces
+		
+		
+		
+		
 		// still need to check for field with spaces but not characters. check set of characters maybe.
 		
 		#Update the post data in order to inject into database
