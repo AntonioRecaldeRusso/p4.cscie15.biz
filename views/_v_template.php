@@ -17,17 +17,18 @@
 
 <body>	
 
-	
+<!--  
 	<div id="top">
-		<!-- The first php block added for alignment purposes. Set to invisible -->	
+		<!-- The first php block added for alignment purposes. Set to invisible 	
 		<h1 id="header"><span id="offset_balancer"><?php if (isset($user->username)) echo $user->username; ?></span>DecisionTree<a id="user_logged"><?php if (isset($user->username)) echo $user->username; ?></a></h1> <br>
+-->			
 			<div id="navbar"> 
-		  	<ul> 
-			<li><a href="/users/login">Login</a></li>
-			<li><a href="/decision/stats">Stats</a></li>
-			<li><a href="/users/logout">Logout</a></li>
-			<li><a href="/decision/index">Trees</a></li> 
-		  	</ul> 
+		  	
+			<a href="/users/login">Login</a>
+			<a href="/decision/stats">Stats</a>
+			<a href="/users/logout">Logout</a>
+			<a href="/decision/index">Trees</a>
+		   
 		</div>
 	</div>
 
