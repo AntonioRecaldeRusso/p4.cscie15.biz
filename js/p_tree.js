@@ -1,10 +1,15 @@
 	counter = 0;
 	index = '';
 	path = '';
+	
 	var options = {
 			type: "POST",
 			beforeSend: function() {
 				id = $('input[name="path"]:checked').attr('id');
+				
+				if ($('#no').is(':disabled'))
+					$('#no').attr('disabled', false);
+				
 				if (id == 'yes')
 					index = index.concat('1');
 				else
@@ -15,7 +20,7 @@
 	//			index: index 
 	//		},
 			success: function(response) {
-				console.log("path response: " + response);
+				console.log(response);
 				$("#yes").val('' + index + '1');
 				$('#no').val('' + index + '0');
 				$('#response' + counter++).html(response);
