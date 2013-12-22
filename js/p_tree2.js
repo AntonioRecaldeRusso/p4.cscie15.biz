@@ -17,11 +17,16 @@
 					index = index.concat('0');
 			},
 			success: function(response) {
-				console.log(response);
+			var data = $.parseJSON(response);
+				 
+				if (data['link'] != null)
+					{
+						index = data['link'];
+					}
+				
 				$("#yes").val('' + index + '1');
 				$('#no').val('' + index + '0');
-				$('#response' + counter++).html(response);
-				
+				$('#response' + counter++).html(data['content']);
 			}
 			
 	};
