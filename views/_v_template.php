@@ -8,6 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script src="/js/jquery.form.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	
 					
 	<!-- Controller Specific JS/CSS -->
@@ -17,18 +18,17 @@
 
 <body>	
 
-<!--  
+	
 	<div id="top">
-		<!-- The first php block added for alignment purposes. Set to invisible 	
+		<!-- The first php block added for alignment purposes. Set to invisible -->	
 		<h1 id="header"><span id="offset_balancer"><?php if (isset($user->username)) echo $user->username; ?></span>DecisionTree<a id="user_logged"><?php if (isset($user->username)) echo $user->username; ?></a></h1> <br>
--->			
 			<div id="navbar"> 
-		  	
-			<a href="/users/login">Login</a>
-			<a href="/decision/stats">Stats</a>
-			<a href="/users/logout">Logout</a>
-			<a href="/decision/index">Trees</a>
-		   
+		  	<ul> 
+			<li><a href="/users/login">Login</a></li>
+			<li><a href="/users/logout">Logout</a></li>
+			<li><a href="/decision/index">Trees</a></li>
+			<li><a href="/users/signup">Signup</a></li>
+		  	</ul> 
 		</div>
 	</div>
 
