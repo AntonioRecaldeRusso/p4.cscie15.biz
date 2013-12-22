@@ -14,32 +14,30 @@
 			$this->template->content = View::instance('v_decision_index');
 			
 			#Set header information
-			$client_files_head = array('/js/p_tree.js');
+			$client_files_head = array('/css/trees_users.css');
 			$this->template->client_files_head = Utils::load_client_files($client_files_head);
+			
+			#Set body information
+			$client_files_body = array();
+			$this->template->client_files_body = Utils::load_client_files($client_files_body);
 			
 			#Set title
 			$this->template->title = 'p4.cscie15.biz';
+			
+			# Build the query to get all the trees
+			$q = "SELECT *
+			FROM trees_users";
+			
+			# Execute the query to get all the users.
+			# Store the result array in the variable $users
+			$trees = DB::instance(DB_NAME)->select_rows($q);
+			
+			# Pass data to view
+			$this->template->content->trees = $trees;
 			
 			#Render the view
 			echo $this->template;
 		}	
-		
-		public function stats() {
-			# Set up the View
-			$this->template->content = View::instance("v_decision_stats");
-			
-			# Set header information
-			$client_files_head = array();
-			$this->template->client_files_head = Utils::load_client_files($client_files_head);
-			
-			
-				
-			#Set title
-			$this->template->title = 'p4.cscie15.biz';
-				
-			#Render the view
-			echo $this->template;
-		}
 		
 		public function p_tree()
 		{
@@ -102,6 +100,7 @@
 			
 			$q = "SELECT content FROM tree_posts WHERE tree_name = 'children' AND binary_key = '".$path."'";
 			$result = DB::instance(DB_NAME)->select_field($q);
+			$data['content'] = $result;
 			
 			if ($result == '')
 			{
@@ -109,10 +108,11 @@
 				$new_path = DB::instance(DB_NAME)->select_field($link);
 				$q = "SELECT content FROM tree_posts WHERE tree_name = 'children' AND binary_key = '".$new_path."'";
 				$result = DB::instance(DB_NAME)->select_field($q);
+				$data['link'] = $new_path;
+				$data['content'] = $result;
 			}
 			
-			
-			echo $result;
+			echo json_encode($data);
 		}
 		
 /*		public function add_questions() {
