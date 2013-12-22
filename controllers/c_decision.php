@@ -78,22 +78,36 @@
 		
 		}
 		
-		public function tree() {
-			#Set up the View
+		public function tree($username = NULL, $tree_name = NULL) {
+			
+			if ($username == NULL || $tree_name == NULL)
+				Router::redirect('/decision/');
+			
+			# Set up the View
 			$this->template->content = View::instance('v_decision_tree');
 				
-			#Set header information
+			# Set header information
 			$client_files_head = array('/js/p_tree2.js');
 			$this->template->client_files_head = Utils::load_client_files($client_files_head);
 				
-			#Set title
+			# Set title
 			$this->template->title = 'p4.cscie15.biz';
-				
+			
+			# Get first question for the tree.. or tree title
+			$q = "SELECT title FROM trees_users WHERE username = '".$username."' AND tree_name = '".$tree_name."'" ;
+			$tree_title = DB::instance(DB_NAME)->select_field($q);
+			
+			# Pass data
+			$this->template->content->username = $username;
+			$this->template->content->tree_name = $tree_name;
+			$this->template->content->tree_title = $tree_title;
+			
+			
 			#Render the view
 			echo $this->template;
 		}
 		
-		public function p_tree2($tree_name = null)
+		public function p_tree2()
 		{
 			$data = Array();
 			$path = $_POST['path'];
