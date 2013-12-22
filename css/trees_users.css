@@ -1,0 +1,90 @@
+#wrapper {
+	width: 35%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3%;
+}
+
+#table_title {
+	text-align: center;
+}
+
+.name a {
+	text-decoration: none;
+	color: black;
+	display: block;
+	font-size: 1.5em;
+}
+.name:hover, .link:hover {
+	background-color: lightgray;
+}
+
+.link a{
+	text-decoration: none;
+	display: block;
+	color: black;
+}
+
+.follow {
+	width: 45%;
+	background-color: lightyellow;
+	border: solid 1px lightpink;
+}
+
+.unfollow {
+	width: 45%;
+	background-color: lightyellow;
+	border: 1px solid lightgreen;
+}
+
+.table {
+	margin:0px;padding:0px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #000000;
+	
+	-moz-border-radius-bottomleft:7px;
+	-webkit-border-bottom-left-radius:7px;
+	border-bottom-left-radius:7px;
+	
+	-moz-border-radius-bottomright:7px;
+	-webkit-border-bottom-right-radius:7px;
+	border-bottom-right-radius:7px;
+	
+	-moz-border-radius-topright:7px;
+	-webkit-border-top-right-radius:7px;
+	border-top-right-radius:7px;
+	
+	-moz-border-radius-topleft:7px;
+	-webkit-border-top-left-radius:7px;
+	border-top-left-radius:7px;
+}.table table{
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}.table tr:last-child td:last-child {
+	-moz-border-radius-bottomright:7px;
+	-webkit-border-bottom-right-radius:7px;
+	border-bottom-right-radius:7px;
+}
+.table table tr:first-child td:first-child {
+	-moz-border-radius-topleft:7px;
+	-webkit-border-top-left-radius:7px;
+	border-top-left-radius:7px;
+}
+.table table tr:first-child td:last-child {
+	-moz-border-radius-topright:7px;
+	-webkit-border-top-right-radius:7px;
+	border-top-right-radius:7px;
+}.table tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:7px;
+	-webkit-border-bottom-left-radius:7px;
+	border-bottom-left-radius:7px;
+}.table tr:hover td{
+	
+}
+.table tr:nth-child(odd){ background-color:#E6E6E6; }
+.table tr:nth-child(even)    { background-color:#ffffff; }
+.table tr:last-child td{ border-width:0px 1px 0px 0px; }
+.table tr td:last-child{ border-width:0px 0px 1px 0px; }
+.table tr:last-child td:last-child{	border-width:0px 0px 0px 0px; }
