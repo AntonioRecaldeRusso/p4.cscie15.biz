@@ -10,7 +10,7 @@
                         <td class="name">
 
     <!-- Print this user's name -->
-    <a href=<?php echo "'/decision/tree/".$tree['tree_name']."'" ?>><?php echo $tree['title']?></a>
+    <a href=<?php echo "'/decision/tree/".$tree['username']."/".$tree['tree_name']."'" ?>><?php echo $tree['title']?></a>
 
                         </td>
                         <td class="link">
