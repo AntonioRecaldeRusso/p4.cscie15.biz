@@ -1,7 +1,12 @@
+#pop {
+	
+}
+
 .popbox {
   margin:0px auto;
   text-align:center;
   position:relative;
+  display: inline-block;
 }
 
   .collapse { position:relative; }
