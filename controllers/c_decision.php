@@ -5,7 +5,11 @@
 			parent::__construct();
 		}
 		
-		public function index() {	
+		public function index() {
+			# Ensure login
+			if (!$this->user)
+				Router::redirect('/users/login');
+			
 			#Set up the View
 			$this->template->content = View::instance('v_decision_index');
 			
