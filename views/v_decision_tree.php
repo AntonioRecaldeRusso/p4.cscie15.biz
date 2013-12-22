@@ -1,5 +1,5 @@
 
-<h3 id="response">You dropped food on the floor, do you eat it?</h3>
+<h3 id="response">title</h3>
 
 <form>
 <input id="yes" type="radio" name="path" value='1' checked>Yes
