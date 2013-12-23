@@ -192,7 +192,16 @@ class users_controller extends base_controller
 		Router::redirect('/');
 	}
 
-
+	public function p_navAccess() {
+		$data = Array();
+		$data['logged_in'] = FALSE;
+		
+		if ($this->user)
+			$data['logged_in'] = TRUE;
+		
+		echo json_encode($data);
+		
+	}
 
 
 
