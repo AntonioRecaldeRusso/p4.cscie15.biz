@@ -7,6 +7,14 @@
 	margin-top: 10px;
 }
 
+#instructions {
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	background-color: lightgray;
+}
+
 #tree_title {
 	margin-left: auto;
 	margin-right: auto;
@@ -27,6 +35,7 @@
 	width: 15%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 15px;
 	border: 1px solid purple;
 	text-align: center;
 	background-color: lightyellow;
@@ -34,7 +43,7 @@
 }
 
 #form_div a {
-	text-decoration: none;
+	color: cornflowerblue;
 }
 
 .branches {
