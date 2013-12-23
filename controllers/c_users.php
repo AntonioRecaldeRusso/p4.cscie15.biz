@@ -31,7 +31,7 @@ class users_controller extends base_controller
 		$this->template->content = View::instance("v_users_signup");
 	
 		# Set up header files
-		$client_files_head = array("/css/style.css", '/css/users_login.css');
+		$client_files_head = array("/css/style.css", '/css/users_signup.css');
 		$this->template->client_files_head = Utils::load_client_files($client_files_head);
 		
 		# Set client files in body
