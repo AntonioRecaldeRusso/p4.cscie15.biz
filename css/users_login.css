@@ -313,3 +313,8 @@ FOOTER
 	position: relative;
 	bottom: -1px;
 }
+
+
+#response {
+	color: red;
+}
