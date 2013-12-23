@@ -40,6 +40,8 @@
 		}	
 		
 		public function tree($username = NULL, $tree_name = NULL) {
+			if (!$this->user)
+				Router::redirect('/users/login');
 			
 			if ($username == NULL || $tree_name == NULL)
 				Router::redirect('/decision/');
@@ -99,6 +101,29 @@
 		}
 		
 		public function create() {
+			# Ensure login
+			if (!$this->user)
+				Router::redirect('/users/login');
+				
+			#Set up the View
+			$this->template->content = View::instance('v_decision_create');
+						
+			#Set header information
+			$client_files_head = array('/css/decision_create.css');
+			$this->template->client_files_head = Utils::load_client_files($client_files_head);
+						
+			#Set body information
+	//		$client_files_body = array();
+	//		$this->template->client_files_body = Utils::load_client_files($client_files_body);
+				
+			#Set title
+			$this->template->title = 'Create';
+				
+			#Render the view
+			echo $this->template;
+		}
+		
+		public function p_create() {
 			
 		}
 		
