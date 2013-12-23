@@ -1,0 +1,44 @@
+#responses {
+	margin-left: auto;
+	margin-right: auto;
+	width: 30%;
+	text-align: center;
+	padding: 5px;
+	margin-top: 10px;
+}
+
+#tree_title {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: block;
+	padding: 15px;
+	border: 1px solid yellow;
+	width: 30%;
+	background-color: lightyellow;
+	border-radius: 7px;
+}
+
+#radio_form {
+	
+}
+
+#form_div {
+	width: 15%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid purple;
+	text-align: center;
+	background-color: lightyellow;
+	border-radius: 7px;
+}
+
+#form_div a {
+	text-decoration: none;
+}
+
+.branches {
+	background-color: lightyellow;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
