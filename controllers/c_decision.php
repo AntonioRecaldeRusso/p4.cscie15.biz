@@ -87,8 +87,12 @@
 			$this->template->content = View::instance('v_decision_tree');
 				
 			# Set header information
-			$client_files_head = array('/js/p_tree2.js');
+			$client_files_head = array('/css/decision_tree.css');
 			$this->template->client_files_head = Utils::load_client_files($client_files_head);
+			
+			# Set body information
+			$client_files_body = array('/js/p_tree2.js');
+			$this->template->client_files_body = Utils::load_client_files($client_files_body);
 				
 			# Set title
 			$this->template->title = 'p4.cscie15.biz';
@@ -107,24 +111,28 @@
 			echo $this->template;
 		}
 		
-		public function p_tree2()
+		public function p_tree2($username = NULL, $tree_name = NULL)
 		{
 			$data = Array();
+		
 			$path = $_POST['path'];
 			
-			$q = "SELECT content FROM tree_posts WHERE tree_name = 'children' AND binary_key = '".$path."'";
+			$q = "SELECT content FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$path."'";
 			$result = DB::instance(DB_NAME)->select_field($q);
 			$data['content'] = $result;
 			
 			if ($result == '')
 			{
-				$link = "SELECT link FROM tree_posts WHERE tree_name = 'children' AND binary_key = '".$path."'";
+				$link = "SELECT link FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$path."'";
 				$new_path = DB::instance(DB_NAME)->select_field($link);
-				$q = "SELECT content FROM tree_posts WHERE tree_name = 'children' AND binary_key = '".$new_path."'";
+				$q = "SELECT content FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$new_path."'";
 				$result = DB::instance(DB_NAME)->select_field($q);
 				$data['link'] = $new_path;
 				$data['content'] = $result;
-			}
+				
+				if ($new_path == '')
+					$data['end'] = true;
+			} 
 			
 			echo json_encode($data);
 		}
