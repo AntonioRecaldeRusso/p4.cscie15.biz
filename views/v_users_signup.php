@@ -4,9 +4,9 @@
 	
 		<div class="header">
 			<h1>Sign up</h1>
-			<div id="fields_error"></div>
-			<div id="username_error"></div>
-			<div id="password_error"></div>
+			<div class="error" id="username_error"></div>
+			<div class="error" id="password_error"></div>
+			<div class="error" id="fields_error"></div>
 		</div>
 	
 		<div class="content">
