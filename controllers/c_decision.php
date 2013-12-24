@@ -78,30 +78,13 @@
 		
 		public function p_tree($username = NULL, $tree_name = NULL)
 		{
-			$data = Array();
-			$path = $_POST['path'];
 			
 			# This will pass data to display questions
-			$q = "SELECT content FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$path."'";
-			$result = DB::instance(DB_NAME)->select_field($q);
-			$data['content'] = $result;
+			$q = "SELECT * FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."'";
+			$result = DB::instance(DB_NAME)->select_rows($q);
 			
-			# if empty, check to see if there is a link variable declared in the database. If so, this question will branch into the linked one.
-			if ($result == '')
-			{
-				$link = "SELECT link FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$path."'";
-				$new_path = DB::instance(DB_NAME)->select_field($link);
-				$q = "SELECT content FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$new_path."'";
-				$result = DB::instance(DB_NAME)->select_field($q);
-				$data['link'] = $new_path;
-				$data['content'] = $result;
-				
-				# If there is no link, it means that this is the end of a branch. Data end will inform this to the .js file.
-				if ($new_path == '')
-					$data['end'] = true;
-			} 
 			
-			echo json_encode($data);
+			echo json_encode($result);
 		}
 		
 		public function create() {
@@ -191,14 +174,18 @@
 						continue;
 					}
 					else 
-					{ 	# if the first character is "@", this is a link to another question.. thus created 'link' index so it will be passed.
-						if (substr($_POST[$key], 0, 1) == '@')
-							$row_data['link'] = $_POST[$key];
-							
+					{
 						$row_data['tree_name'] = $tree_name;
 						$row_data['username'] = $this->user->username;
 						$row_data['binary_key'] = $key;
 						$row_data['content'] = $value;
+						
+						# if the first character is "@", this is a link to another question.. thus created 'link' index so it will be passed.
+						if (substr($_POST[$key], 0, 1) == '@')
+						{
+							$row_data['link'] = substr($_POST[$key], 1);
+							$row_data['content'] = "";								
+						}
 						
 						DB::instance(DB_NAME)->insert_row('tree_posts', $row_data);
 					}				

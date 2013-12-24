@@ -8,6 +8,9 @@
  * 
  */
 
+$(function() {
+	
+
 	counter = 0;
 	index = '';
 	last_message = '';
@@ -38,32 +41,34 @@
 			},
 			data: {
 				username: $('#username').data("username"),
-				tree_name: $('#tree_name').data("tree_name")
+				tree_name: $('#tree_name').data("tree_name"),
 			},
 			success: function(response) {
 				var data = $.parseJSON(response);
-				 
-				if (data['end'] == true)				// if this is the end of a branch... it means it's the final answer.
+				
+				
+				var objects = Array();
+				for (var i = 0; i < data['length']; i++)
 				{
-					$('#response' + (counter - 1)).css('background-color', 'yellow');
-					alert("End of branch.\n\n" + last_message);
+					objects['' + data[i]['binary_key']] = data[i];
 				}
 				
-				/*
-				 * if there is a link declared, the new index is that link. Thus, question can connect to other questions.
-				 * E.g. If the YES answer to question 1000 links to question 111, then the program will thereon proceed from 111.
-				 */
-				if (data['link'] != null)				
-						index = data['link'];
+				try {
 					
-				/*
-				 * updating values of radio buttons.. 
-				 */
-				$("#yes").val('' + index + '1');
-				$('#no').val('' + index + '0');
-				$('#response' + counter++).html(data['content']);
-				last_message = data['content'];  
+					if (objects[index]["link"])
+						index = objects[index]["link"];
+					
+					var content = objects[index]['content'];
+					$('#response' + counter++).html(content);
+					last_message = content;
+				} catch (err) {
+					$('#response' + --counter).css('background-color', 'yellow');
+					alert("End of branch.\n" + last_message);
+				}
+					
 			}
 	};
 
 	$("form").ajaxForm(options);
+	
+});
