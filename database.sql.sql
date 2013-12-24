@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 24, 2013 at 02:17 AM
+-- Generation Time: Dec 24, 2013 at 02:53 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `p4_cscie15_biz`
+-- Database: `csciebiz_p4_cscie15_biz`
 --
-CREATE DATABASE IF NOT EXISTS `p4_cscie15_biz` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `p4_cscie15_biz`;
+CREATE DATABASE IF NOT EXISTS `csciebiz_p4_cscie15_biz` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `csciebiz_p4_cscie15_biz`;
 
 -- --------------------------------------------------------
 
