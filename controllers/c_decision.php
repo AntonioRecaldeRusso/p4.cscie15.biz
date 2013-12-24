@@ -65,8 +65,8 @@
 				
 			
 			# wrong address format, redirect
-			if ($username == NULL || $tree_name == NULL)
-				Router::redirect('/decision/');
+		//	if ($username == NULL || $tree_name == NULL)
+		//		Router::redirect('/decision/');
 			
 			# Set up the View
 			$this->template->content = View::instance('v_decision_tree');
@@ -93,7 +93,7 @@
 			
 			
 			#Render the view
-			echo $this->template;
+	//		echo $this->template;
 		}
 		
 		/**
