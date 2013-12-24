@@ -45,7 +45,7 @@ $('#create_button').click(function() {
 			data = $.parseJSON(response);
 			$('#error').html(data['error']);
 			
-			if (data['error'] == "")
+			if (data['error'] == "")		// if data['error'] is an empty string, there are no errors... create was successfull.
 			{
 				document.location.href = '/decision/';
 			}

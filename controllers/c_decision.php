@@ -1,10 +1,19 @@
 <?php
+	/**
+	 * This class manages all content and processes related to the production of decision making trees
+	 * 
+	 * @author Antonio Recalde
+	 *
+	 */
 	class decision_controller extends base_controller {
 		
 		public function __construct() {
 			parent::__construct();
 		}
 		
+		/**
+		 * This function creates the index page.
+		 */
 		public function index() {
 			# Ensure login
 			if (!$this->user)
@@ -39,12 +48,19 @@
 			echo $this->template;
 		}	
 		
+		/**
+		 * 
+		 * This function creates the view for /decision/tree/[username]/[tree_name].
+		 * 
+		 * @param unknown_type $username
+		 * @param unknown_type $tree_name
+		 */
 		public function tree($username = NULL, $tree_name = NULL) {
 			# Ensure login
 			if (!$this->user)
 				Router::redirect('/users/login');
 			
-			# wrong address, redirect
+			# wrong address format, redirect
 			if ($username == NULL || $tree_name == NULL)
 				Router::redirect('/decision/');
 			
@@ -76,6 +92,13 @@
 			echo $this->template;
 		}
 		
+		/**
+		 * This function processes data for v_decision_tree.php. It retrieves all rows associated with a particular user + tree_name combination
+		 * and passes it to a .js file for further processing.
+		 * 
+		 * @param unknown_type $username
+		 * @param unknown_type $tree_name
+		 */
 		public function p_tree($username = NULL, $tree_name = NULL)
 		{
 			
@@ -87,6 +110,9 @@
 			echo json_encode($result);
 		}
 		
+		/**
+		 * Creates view for /decision/create
+		 */
 		public function create() {
 			# Ensure login
 			if (!$this->user)
@@ -110,8 +136,14 @@
 			echo $this->template;
 		}
 		
-		public function p_create() {		
+		/**
+		 * Processes create tree information. It places data obtained from a form into the database.
+		 */
+		public function p_create() {
+			# Prepare placeholder for json encoded data	
 			$data = Array();
+		
+			# Initialize placeholder for error reporting
 			$data['error'] = '';
 			
 			# Sanitize
@@ -119,10 +151,13 @@
 			
 			# Check to see if database name already exists for this user. The same user cannot have two trees with the same name
 			$tree_name_exists = DB::instance(DB_NAME)->select_field("SELECT tree_name FROM tree_posts WHERE username = '".$this->user->username."' AND tree_name = '".$_POST['tree_name']."'");                        
+			
+			/*
+			 * The following if statements append strings to the $data['error'] placeholder.
+			 * If at the end of this segment $data['error'] is still equal to an empty string, means there were no errors
+			 */
 			if ($tree_name_exists)
-			{
 				$data['error'] = ' Tree name already exists.';
-			}
 			
 			if (!isset($_POST['tree_name']) || empty($_POST['tree_name']))
 				$data['error'] .= " Tree name must be provided.";
@@ -138,6 +173,8 @@
 			
 			if (!isset($_POST['11']) || empty($_POST['11']))
 				$data['error'] .= " Text field 11 cannot be empty.";
+			
+			
 			
 			# If data error is an empty string, it means there are no erros. So proceed to interacting with the database
 			if ($data['error'] == "")
@@ -156,7 +193,7 @@
 				unset($_POST['tree_name']);
 				unset($_POST['tree_title']);
 				
-				# Unsetting all empty variables
+				# Unsetting all empty variables. There is no need to save empty data
 				foreach ($_POST as $key=>$value)
 				{
 					if(empty($_POST[$key]))
@@ -170,9 +207,7 @@
 					
 					# Re-check just in case. Value must not be empty in order to insert
 					if ($value == "")
-					{
 						continue;
-					}
 					else 
 					{
 						$row_data['tree_name'] = $tree_name;
@@ -180,7 +215,7 @@
 						$row_data['binary_key'] = $key;
 						$row_data['content'] = $value;
 						
-						# if the first character is "@", this is a link to another question.. thus created 'link' index so it will be passed.
+						# if the first character is "@", this is a link to another question.. thus create 'link' index so it will be passed.
 						if (substr($_POST[$key], 0, 1) == '@')
 						{
 							$row_data['link'] = substr($_POST[$key], 1);

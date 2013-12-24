@@ -1,11 +1,20 @@
 <?php
-
+/**
+ * 
+ * This class manages all processes related to user accounts
+ * 
+ * @author admin
+ *
+ */
 class users_controller extends base_controller 
 {
 	public function __construct() {
 		parent::__construct();
 	}
-
+	
+	/**
+	 * Redirects to a page depending on login status
+	 */
 	public function index() {
 		# Make sure this page cannot be accessed when the user is logged in
 		if ($this->user)
@@ -15,6 +24,9 @@ class users_controller extends base_controller
 			Router::redirect('/users/login');
 	}
 	
+	/**
+	 * Enables view for signup page
+	 */
 	public function signup()
 	{
 		# Make sure this page cannot be accessed when the user is logged in
@@ -39,6 +51,9 @@ class users_controller extends base_controller
 		echo $this->template;
 	}
 	
+	/**
+	 * Processes data from signup form
+	 */
 	public function p_signup()
 	{
 		# Prepare data array
@@ -120,6 +135,9 @@ class users_controller extends base_controller
 		echo json_encode($data);
 	}
 	
+	/**
+	 * Enables View for login page
+	 */
 	public function login() {
 		#Make sure logged in users cannot access this page
 		if ($this->user)
@@ -171,6 +189,9 @@ class users_controller extends base_controller
 		
 	}
 	
+	/**
+	 * Logs user out
+	 */
 	public function logout() {
 		#Only logged in users can logout
 		if (!$this->user)
@@ -184,7 +205,9 @@ class users_controller extends base_controller
 		Router::redirect('/');
 	}
 
-	# Processes navAccess.js. Disables hyperlinks depending on logged in state.
+	/**
+	 * Processes navAccess.js. Disables hyperlinks depending on login state
+	 */
 	public function p_navAccess() {
 		$data = Array();
 		$data['logged_in'] = FALSE;

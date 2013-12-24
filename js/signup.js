@@ -1,6 +1,8 @@
 
-/**\
- * Processes user sign up
+/**
+ * 
+ * This file processes user sign up
+ * 
  */
 $('#p_signup').click(function() {
 

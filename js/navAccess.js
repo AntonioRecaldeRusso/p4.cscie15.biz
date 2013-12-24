@@ -9,13 +9,15 @@ $( document ).ready(function() {
 		success: function(response) {
 			var data = $.parseJSON(response);
 			
-			if (data['logged_in'] == true)
+			// If the user is logged in, disable links
+			if (data['logged_in'] == true)			
 			{
 				$('.logged_off').bind('click', false);
 				$('.logged_in').unbind('click', false);
 			}
 			else
 			{
+				// user is logged in, enable
 				$('.logged_in').bind('click', false);
 				$('.logged_off').unbind('click', false);
 			}
