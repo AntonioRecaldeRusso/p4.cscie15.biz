@@ -44,7 +44,11 @@ $('#create_button').click(function() {
 		success: function(response) {
 			data = $.parseJSON(response);
 			$('#error').html(data['error']);
-			console.log(data);
+			
+			if (data['error'] == "")
+			{
+				document.location.href = '/decision/';
+			}
 		}
 	});
 });
