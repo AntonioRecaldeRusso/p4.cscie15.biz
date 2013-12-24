@@ -10,12 +10,12 @@
 		</div>
 	
 		<div class="content">
-		<input name="username" type="text" class="input username" placeholder="username" name="username" id="username" maxlength="16" />
+		<input name="username" type="text" class="input username" placeholder="username" id="username" maxlength="16" />
 		<div class="user-icon"></div>
-		<input name="password" type="password" class="input password" placeholder="password" name="password" id="password" maxlength="16" />
+		<input name="password" type="password" class="input password" placeholder="password" id="password" maxlength="16" />
 		<div class="pass-icon"></div>
 		<div class="user-icon"></div>
-		<input name="password" type="password" class="input password" placeholder="password" name="password2" id="password2" maxlength="16" />
+		<input name="password" type="password" class="input password" placeholder="password" id="password2" maxlength="16" />
 		<div class="pass-icon"></div>		
 		</div>
 
