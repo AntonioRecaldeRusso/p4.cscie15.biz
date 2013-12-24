@@ -113,8 +113,8 @@
 			$this->template->client_files_head = Utils::load_client_files($client_files_head);
 						
 			#Set body information
-	//		$client_files_body = array();
-	//		$this->template->client_files_body = Utils::load_client_files($client_files_body);
+			$client_files_body = array('/js/p_create.js');
+			$this->template->client_files_body = Utils::load_client_files($client_files_body);
 				
 			#Set title
 			$this->template->title = 'Create';
@@ -123,10 +123,81 @@
 			echo $this->template;
 		}
 		
-		public function p_create() {
+		public function p_create() {		
+			$data = Array();
+			$data['error'] = '';
 			
-		}
+			# Sanitize
+			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+			
+			# Check to see if database name already exists for this user. The same user cannot have two trees with the same name
+			$tree_name_exists = DB::instance(DB_NAME)->select_field("SELECT tree_name FROM tree_posts WHERE username = '".$this->user->username."' AND tree_name = '".$_POST['tree_name']."'");                        
+			if ($tree_name_exists)
+			{
+				$data['error'] = ' Tree name already exists.';
+			}
+			
+			if (!isset($_POST['tree_name']) || empty($_POST['tree_name']))
+				$data['error'] .= " Tree name must be provided.";
+				
+			if (!isset($_POST['tree_title']) || empty($_POST['tree_title']))
+				$data['error'] .= " Tree title must be provided.";
+			
+			if (!isset($_POST['1']) || empty($_POST['1']))
+				$data['error'] .= " Text field 1 cannot be empty.";
+			
+			if (!isset($_POST['10']) || empty($_POST['10']))
+				$data['error'] .= " Text field 10 cannot be empty.";
+			
+			if (!isset($_POST['11']) || empty($_POST['11']))
+				$data['error'] .= " Text field 11 cannot be empty.";
+			
+			if ($data['error'] == "")
+			{	
+				$row_data2 = Array();
+				$row_data2['title'] = $_POST['tree_title'];
+				$row_data2['username'] = $this->user->username;
+				$row_data2['tree_name'] = $_POST['tree_name'];
+				
+				DB::instance(DB_NAME)->insert_row('trees_users', $row_data2);
+				
+				
+				$tree_name = $_POST['tree_name'];
+				$tree_title = $_POST['tree_title'];
+				unset($_POST['tree_name']);
+				unset($_POST['tree_title']);
+				foreach ($_POST as $key=>$value)
+				{
+					if(empty($_POST[$key]))
+						unset($_POST[$key]);
+				}
+				
+				foreach ($_POST as $key=>$value)
+				{
+					$row_data = Array();
+					
+					if ($value == "")
+					{
+						continue;
+					}
+					else 
+					{
+						if (substr($_POST[$key], 0, 1) == '@')
+							$row_data['link'] = $_POST[$key];
+							
+						$row_data['tree_name'] = $tree_name;
+						$row_data['username'] = $this->user->username;
+						$row_data['binary_key'] = $key;
+						$row_data['content'] = $value;
+						
+						DB::instance(DB_NAME)->insert_row('tree_posts', $row_data);
+					}				
+					
+				} 
+			} 
+			echo json_encode($data);
 		
+		}
 }
 ?>
 	
