@@ -27,8 +27,8 @@
 		  	<ul> 
 			<li><a class="logged_off" href="/users/login">Login</a></li>
 			<li><a class="logged_off" href="/users/signup">Signup</a></li>
-			<li><a href="/decision/index">Trees</a></li>
-			<li><a href="/decision/create">Create</a></li>
+			<li><a class="logged_in" href="/decision/index">Trees</a></li>
+			<li><a class="logged_in" href="/decision/create">Create</a></li>
 			<li><a class="logged_in" href="/users/logout">Logout</a></li>
 			
 		  	</ul> 
