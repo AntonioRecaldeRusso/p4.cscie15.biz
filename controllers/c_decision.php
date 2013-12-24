@@ -60,6 +60,10 @@
 			if (!$this->user)
 				Router::redirect('/users/login');
 			
+			# wrong address format, redirect
+			if ($username == NULL || $tree_name == NULL)
+				Router::redirect('/decision/');
+			
 			# Set up the View
 			$this->template->content = View::instance('v_decision_tree');
 				
