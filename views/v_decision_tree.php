@@ -15,6 +15,9 @@
 
 <div id="responses">
 
+<!-- the following p tags will be dynamically update, displaying each question.. They end with a numerical value due that 
+	a counter is being used to determine which tag's content must be changed -->
+
 	<p class="branches" id="response0"></p>
 	<p class="branches" id="response1"></p>
 	<p class="branches" id="response2"></p>

@@ -1,6 +1,10 @@
 <div id="wrapper">
     <h4 id="table_title">Decision trees</h4>
 
+    
+    
+    <!--  This will print a table with names and title of each decision making tree they created.  -->
+    
     <div class="table" >
                 <table >
 

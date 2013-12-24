@@ -1,3 +1,7 @@
+/**
+ * This file toggles the accessibility to hyperlinks depending on login status
+ */
+
 $( document ).ready(function() {
 	$.ajax({
 		type: 'POST',

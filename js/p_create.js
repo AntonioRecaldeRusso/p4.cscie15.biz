@@ -1,10 +1,13 @@
+/**
+ * This file processes the create tree form
+ */
 $('#create_button').click(function() {
 
 	$.ajax({
 		type: 'POST',
 		url: '/decision/p_create',
 		data: {
-			tree_name: $('#tree_name').val(),
+			tree_name: $('#tree_name').val(),					// passing all data from text fields
 			tree_title: $('#tree_title').val(),
 			1: $('#input-1').val(),
 			10: $('#input-10').val(),

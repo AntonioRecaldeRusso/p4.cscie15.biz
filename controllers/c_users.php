@@ -7,18 +7,12 @@ class users_controller extends base_controller
 	}
 
 	public function index() {
-		# Set up the view
-		$this->template->content = View::instance("v_users_index");
-	
-		# Set header information
-	//	$client_files_head = array("/css/users.css");
-	//	$this->template->client_files_head = Utils::load_client_files($client_files_head);
+		# Make sure this page cannot be accessed when the user is logged in
+		if ($this->user)
+			Router::redirect('/decision/index');
 		
-		# Set title
-		$this->template->title = "p4.cscie15.biz";
-		
-		# Render the page
-		echo $this->template;
+		else
+			Router::redirect('/users/login');
 	}
 	
 	public function signup()
@@ -41,15 +35,13 @@ class users_controller extends base_controller
 		# Set title
 		$this->template->title = 'Sign Up';
 		
-		# Pass info to View
-		
 		# Render
 		echo $this->template;
 	}
 	
 	public function p_signup()
 	{
-		// Prepare data array
+		# Prepare data array
 		$data = Array();	
 		
 		#Sanitize
@@ -192,6 +184,7 @@ class users_controller extends base_controller
 		Router::redirect('/');
 	}
 
+	# Processes navAccess.js. Disables hyperlinks depending on logged in state.
 	public function p_navAccess() {
 		$data = Array();
 		$data['logged_in'] = FALSE;

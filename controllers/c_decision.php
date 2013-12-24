@@ -40,9 +40,11 @@
 		}	
 		
 		public function tree($username = NULL, $tree_name = NULL) {
+			# Ensure login
 			if (!$this->user)
 				Router::redirect('/users/login');
 			
+			# wrong address, redirect
 			if ($username == NULL || $tree_name == NULL)
 				Router::redirect('/decision/');
 			
@@ -77,13 +79,14 @@
 		public function p_tree($username = NULL, $tree_name = NULL)
 		{
 			$data = Array();
-		
 			$path = $_POST['path'];
 			
+			# This will pass data to display questions
 			$q = "SELECT content FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$path."'";
 			$result = DB::instance(DB_NAME)->select_field($q);
 			$data['content'] = $result;
 			
+			# if empty, check to see if there is a link variable declared in the database. If so, this question will branch into the linked one.
 			if ($result == '')
 			{
 				$link = "SELECT link FROM tree_posts WHERE username = '".$_POST['username']."' AND tree_name = '".$_POST['tree_name']."' AND binary_key = '".$path."'";
@@ -93,6 +96,7 @@
 				$data['link'] = $new_path;
 				$data['content'] = $result;
 				
+				# If there is no link, it means that this is the end of a branch. Data end will inform this to the .js file.
 				if ($new_path == '')
 					$data['end'] = true;
 			} 
@@ -152,8 +156,10 @@
 			if (!isset($_POST['11']) || empty($_POST['11']))
 				$data['error'] .= " Text field 11 cannot be empty.";
 			
+			# If data error is an empty string, it means there are no erros. So proceed to interacting with the database
 			if ($data['error'] == "")
 			{	
+				# First, prepare the data, and insert into trees_users info related to authorship and name of tree.
 				$row_data2 = Array();
 				$row_data2['title'] = $_POST['tree_title'];
 				$row_data2['username'] = $this->user->username;
@@ -161,27 +167,31 @@
 				
 				DB::instance(DB_NAME)->insert_row('trees_users', $row_data2);
 				
-				
-				$tree_name = $_POST['tree_name'];
-				$tree_title = $_POST['tree_title'];
+				# There will be inserts within a loop. Unsetting undesired data so that they are not part of the operation.
+				$tree_name = $_POST['tree_name'];			// this is still needed, save it here.
+				$tree_title = $_POST['tree_title'];			// ..same
 				unset($_POST['tree_name']);
 				unset($_POST['tree_title']);
+				
+				# Unsetting all empty variables
 				foreach ($_POST as $key=>$value)
 				{
 					if(empty($_POST[$key]))
 						unset($_POST[$key]);
 				}
 				
+				# This foreach loop will insert each row, one at a time.
 				foreach ($_POST as $key=>$value)
 				{
 					$row_data = Array();
 					
+					# Re-check just in case. Value must not be empty in order to insert
 					if ($value == "")
 					{
 						continue;
 					}
 					else 
-					{
+					{ 	# if the first character is "@", this is a link to another question.. thus created 'link' index so it will be passed.
 						if (substr($_POST[$key], 0, 1) == '@')
 							$row_data['link'] = $_POST[$key];
 							

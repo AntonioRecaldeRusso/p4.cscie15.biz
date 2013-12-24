@@ -1,3 +1,14 @@
+
+<!-- 
+	NOTE:
+		The tournament bracket used in this page was obtained from the internet. It was a left-to-right bracket. I modified it and
+		made it right-to-left.
+
+
+-->
+
+
+
 <p>Instructions: NORTH = YES, SOUTH = NO. Binary numbers symbolize y/n. 1111 = yes yes yes.. 1000 = no no no. In order to link one answer with another, use @ followed by the binary code that corresponds to the answer.. E.g. If at 100 I type @111, that space in the bracket will become 111.. Thus, if the next answer is "yes," the following index will be 1111, and not 1001 (which is what it would have been without the linking). This is a tree, therefore the branching pattern should be intuitive.</p>
 <p id="error"></p>
 

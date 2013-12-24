@@ -1,3 +1,7 @@
+/**
+ * This file ajaxifies the login form...
+ */
+
 $('#p_login').click(function() {
 
 		$.ajax({
