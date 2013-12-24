@@ -58,7 +58,11 @@
 		public function tree($username = NULL, $tree_name = NULL) {
 			# Ensure login
 			if (!$this->user)
-				Router::redirect('/users/login');
+			{
+				echo 'not logged in';
+			//	Router::redirect('/users/login');
+			}
+				
 			
 			# wrong address format, redirect
 			if ($username == NULL || $tree_name == NULL)
@@ -117,7 +121,9 @@
 			# Ensure login
 			if (!$this->user)
 				Router::redirect('/users/login');
-				
+
+			else
+			{
 			#Set up the View
 			$this->template->content = View::instance('v_decision_create');
 						
@@ -134,6 +140,7 @@
 				
 			#Render the view
 			echo $this->template;
+			}
 		}
 		
 		/**
