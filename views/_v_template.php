@@ -22,7 +22,7 @@
 	
 	<div id="top">
 		<!-- The first php block added for alignment purposes. Set to invisible -->	
-		<h1 id="header"><span id="offset_balancer"><?php if (isset($user->username)) echo $user->username; ?></span>DecisionTree<a id="user_logged"><?php if (isset($user->username)) echo $user->username; ?></a></h1> <br>
+		<h1 id="header"><span id="offset_balancer"><?php if (isset($user->username)) echo $user->username; ?></span>Decision Making Tree App!<a id="user_logged"><?php if (isset($user->username)) echo $user->username; ?></a></h1> <br>
 			<div id="navbar"> 
 		  	<ul> 
 			<li><a class="logged_off" href="/users/login">Login</a></li>

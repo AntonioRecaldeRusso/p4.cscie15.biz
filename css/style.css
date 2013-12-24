@@ -61,3 +61,14 @@ p, h1, form, button{border:0; margin:0; padding:0;}
     background: #000;
     display: none;
 }
+
+#welcome_div {
+	margin-top: 10%;
+}
+
+.welcome {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	text-align: center;
+}
