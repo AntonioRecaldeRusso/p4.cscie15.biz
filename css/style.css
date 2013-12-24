@@ -2,7 +2,7 @@
 body{
 font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
 font-size:12px;
-background-image:url('http://trillenthemes.files.wordpress.com/2010/07/blurry-lights-background.jpg');
+background-image:url('/uploads/images/background.jpg');
 background-size: 100%;
 }
 p, h1, form, button{border:0; margin:0; padding:0;}
